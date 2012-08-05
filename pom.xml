@@ -26,9 +26,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/sangupta/nutz.git</connection>
-		<developerConnection>scm:git:http://git@github.com/sangupta/nutz.git</developerConnection>
-		<url>https://github.com/sangupta/nutz</url>
+		<connection>scm:git:git://github.com/sangupta/comparator.git</connection>
+		<developerConnection>scm:git:http://git@github.com/sangupta/comparator.git</developerConnection>
+		<url>https://github.com/sangupta/comparator</url>
 	</scm>
 
 	<developers>
