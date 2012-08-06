@@ -171,22 +171,14 @@ public class HTMLComparer {
 				StartTag st1 = (StartTag) tag1;
 				StartTag st2 = (StartTag) tag2;
 				
-				List<Attribute> attributes1 = st1.getAttributes();
+				// match all attributes from tag1 to tag2
+				if(!testAttributes(st1, st2)) {
+					return false;
+				}
 				
-				for(Attribute attribute1 : attributes1) {
-					String value2 = st2.getAttributeValue(attribute1.getName());
-					if(value2 == null) {
-						System.out.println("Attribute not present in stream2: attribute1=" + attribute1.getBegin() + "; tag2=" + tag2.getBegin());
-						return false;
-					}
-					
-					String value1 = StringEscapeUtils.unescapeHtml4(attribute1.getValue());
-					value2 = StringEscapeUtils.unescapeHtml4(value2);
-					
-					if(!(value1.equals(value2))) {
-						System.out.println("Attribute value mismatch: attribute1=" + attribute1.getBegin() + "; tag2=" + tag2.getBegin());
-						return false;
-					}
+				// match all attributes from tag2 to tag1
+				if(!testAttributes(st2, st1)) {
+					return false;
 				}
 				
 				// checks for self-closing tags
@@ -231,6 +223,40 @@ public class HTMLComparer {
 				break;
 			}
 		} while(true);
+		
+		return true;
+	}
+
+	/**
+	 * Test presence of each attribute from <code>st1</code> in <code>st2</code>. Also, the
+	 * values should be identical.
+	 * 
+	 * @param st1
+	 * @param st2
+	 * @return
+	 */
+	private static boolean testAttributes(StartTag st1, StartTag st2) {
+		List<Attribute> attributes1 = st1.getAttributes();
+		
+		if(attributes1.size() == 0) {
+			return true;
+		}
+		
+		for(Attribute attribute1 : attributes1) {
+			String value2 = st2.getAttributeValue(attribute1.getName());
+			if(value2 == null) {
+				System.out.println("Attribute not present in stream2: attribute1=" + attribute1.getBegin() + "; tag2=" + st2.getBegin());
+				return false;
+			}
+			
+			String value1 = StringEscapeUtils.unescapeHtml4(attribute1.getValue());
+			value2 = StringEscapeUtils.unescapeHtml4(value2);
+			
+			if(!(value1.equals(value2))) {
+				System.out.println("Attribute value mismatch: attribute1=" + attribute1.getBegin() + "; tag2=" + st2.getBegin());
+				return false;
+			}
+		}
 		
 		return true;
 	}
