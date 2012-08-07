@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import net.htmlparser.jericho.Attribute;
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.StartTag;
+import net.htmlparser.jericho.StartTagType;
 import net.htmlparser.jericho.Tag;
 
 /**
@@ -171,29 +172,42 @@ public class HTMLComparer {
 				StartTag st1 = (StartTag) tag1;
 				StartTag st2 = (StartTag) tag2;
 				
-				// match all attributes from tag1 to tag2
-				if(!testAttributes(st1, st2)) {
-					return false;
+				boolean comment = false; 
+				if(st1.getStartTagType() == StartTagType.COMMENT) {
+					index1++;
+					comment = true;
 				}
 				
-				// match all attributes from tag2 to tag1
-				if(!testAttributes(st2, st1)) {
-					return false;
+				if(st2.getStartTagType() == StartTagType.COMMENT) {
+					index2++;
+					comment = true;
 				}
 				
-				// checks for self-closing tags
-				boolean se1 = st1.isSyntacticalEmptyElementTag();
-				boolean se2 = st2.isSyntacticalEmptyElementTag();
-				
-				if((se1 && !se2) || (!se1 && se2)) {
-					if(!se2) {
-						if(tags2.get(index2 + 1).getName().equals(tag1.getName())) {
-							index2++;
-						}
-					} else {
-						// do the other one
-						if(tags1.get(index1 + 1).getName().equals(tag2.getName())) {
-							index1++;
+				if(!comment) {
+					// match all attributes from tag1 to tag2
+					if(!testAttributes(st1, st2)) {
+						return false;
+					}
+					
+					// match all attributes from tag2 to tag1
+					if(!testAttributes(st2, st1)) {
+						return false;
+					}
+					
+					// checks for self-closing tags
+					boolean se1 = st1.isSyntacticalEmptyElementTag();
+					boolean se2 = st2.isSyntacticalEmptyElementTag();
+					
+					if((se1 && !se2) || (!se1 && se2)) {
+						if(!se2) {
+							if(tags2.get(index2 + 1).getName().equals(tag1.getName())) {
+								index2++;
+							}
+						} else {
+							// do the other one
+							if(tags1.get(index1 + 1).getName().equals(tag2.getName())) {
+								index1++;
+							}
 						}
 					}
 				}
