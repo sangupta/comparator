@@ -7,10 +7,15 @@ comparator
 * or the attributes may be written in a different order
 * tags without any data may be self-closed
 
-And thus, there comparison needs markup analysis.
+And thus, the comparison needs markup analysis.
 
 Features
 --------
+
+**0.1.1**
+
+* Support for HTML comments
+* Fixed bug where attribute present in actual HTML was not present in expected HTML
 
 **0.1.0**
 
