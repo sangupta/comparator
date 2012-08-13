@@ -159,6 +159,7 @@ public class HTMLComparer {
 			// element names
 			if(!(tag1.getName().equals(tag2.getName()))) {
 				System.out.println("Tag name mismatch: tag1=" + tag1.getBegin() + "; tag2=" + tag2.getBegin());
+				System.out.println("Expected: " + tag1.getName() + ", Actual: " + tag2.getName());
 				return false;
 			}
 			
@@ -221,6 +222,8 @@ public class HTMLComparer {
 				
 				if(!(content1.equals(content2))) {
 					System.out.println("Content mismatch: tag1=" + tag1.getBegin() + "; tag2=" + tag2.getBegin());
+					System.out.println("Expected: " + content1);
+					System.out.println("Actual: " + content2);
 					return false;
 				}
 				
