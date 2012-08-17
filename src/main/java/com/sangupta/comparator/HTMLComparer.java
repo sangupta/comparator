@@ -29,6 +29,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import net.htmlparser.jericho.Attribute;
+import net.htmlparser.jericho.Config;
+import net.htmlparser.jericho.LoggerProvider;
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.StartTag;
 import net.htmlparser.jericho.StartTagType;
@@ -39,9 +41,13 @@ import net.htmlparser.jericho.Tag;
  * and ignoring the tag closing style, white spaces etc.
  * 
  * @author sangupta
- * 
+ * @since 0.1.0
  */
 public class HTMLComparer {
+	
+	static {
+		Config.LoggerProvider = LoggerProvider.DISABLED;
+	}
 	
 	/**
 	 * Compare the two {@link Reader} implementations that provide the HTML stream.
@@ -159,6 +165,7 @@ public class HTMLComparer {
 			// element names
 			if(!(tag1.getName().equals(tag2.getName()))) {
 				System.out.println("Tag name mismatch: tag1=" + tag1.getBegin() + "; tag2=" + tag2.getBegin());
+				System.out.println("Expected: " + tag1.getName() + "; Actual: " + tag2.getName());
 				return false;
 			}
 			
@@ -221,6 +228,8 @@ public class HTMLComparer {
 				
 				if(!(content1.equals(content2))) {
 					System.out.println("Content mismatch: tag1=" + tag1.getBegin() + "; tag2=" + tag2.getBegin());
+					System.out.println("C1: " + content1);
+					System.out.println("C2: " + content2);
 					return false;
 				}
 				
