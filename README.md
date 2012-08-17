@@ -25,6 +25,19 @@ Features
 
 * Support for comparing HTML markup
 
+Downloads
+---------
+
+Comparator is available via Maven Central as:
+
+```xml
+<dependency>
+    <groupId>com.sangupta</groupId>
+    <artifactId>comparator</artifactId>
+    <version>0.9.0</version>
+</dependency>
+```
+
 Continuous Integration
 ----------------------
 The **library** is continuously integrated and unit tested using the *Travis CI system*.
@@ -37,6 +50,14 @@ The library is tested against
 * Oracle JDK 6
 * Open JDK 7
 * Open JDK 6
+
+Dependencies
+------------
+`comparator` depends on the following powerful parsing libraries:
+
+* [Jericho HTML parser](http://jericho.htmlparser.net) for HTML parsing
+* [Jackson JSON parser](http://jackson.codehaus.org/) for JSON parsing
+* Standarad Java libaries for XML parsing
 
 Versioning
 ----------
