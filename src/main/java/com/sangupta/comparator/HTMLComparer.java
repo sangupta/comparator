@@ -53,16 +53,20 @@ public class HTMLComparer {
 	}
 	
 	/**
-	 * Compare the two {@link Reader} implementations that provide the HTML stream.
+	 * Compare the two {@link Reader} implementations that provide the HTML
+	 * stream.
 	 * 
-	 * @param reader1 the first reader
+	 * @param reader1
+	 *            the first reader
 	 * 
-	 * @param reader2 the second reader
+	 * @param reader2
+	 *            the second reader
 	 * 
-	 * @return <code>true</code> if the HTML structure and values are the same, <code>false</code>
-	 * otherwise
+	 * @return <code>true</code> if the HTML structure and values are the same,
+	 *         <code>false</code> otherwise
 	 * 
-	 * @throws IOException if there is an error reading data
+	 * @throws IOException
+	 *             if there is an error reading data
 	 */
 	public static boolean compareHtml(Reader reader1, Reader reader2) throws IOException {
 		if(reader1 == null) {
@@ -76,20 +80,49 @@ public class HTMLComparer {
 		Source source1 = new Source(reader1);
 		Source source2 = new Source(reader2);
 		
-		return compare(source1, source2);
+		return compareHtml(source1, source2);
 	}
 	
 	/**
-	 * Compare the two {@link InputStream} implementations that provide the HTML stream.
+	 * Compare the two {@link Reader} implementations that provide the HTML
+	 * stream.
 	 * 
-	 * @param stream1 the first stream
+	 * @param reader1
+	 *            the first reader
 	 * 
-	 * @param stream2 the second stream
+	 * @param reader2
+	 *            the second reader
 	 * 
-	 * @return <code>true</code> if the HTML structure and values are the same, <code>false</code>
-	 * otherwise
+	 * @return <code>True</code> if the HTML structure and values are the same,
+	 *         <code>False</code> otherwise, and <code>null</code> if something
+	 *         fails
 	 * 
-	 * @throws IOException if there is an error reading data
+	 */
+	public static Boolean compareHtmlQuietly(Reader reader1, Reader reader2) {
+		try {
+			return compareHtml(reader1, reader2);
+		} catch (IOException e) {
+			// eat up
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Compare the two {@link InputStream} implementations that provide the HTML
+	 * stream.
+	 * 
+	 * @param stream1
+	 *            the first stream
+	 * 
+	 * @param stream2
+	 *            the second stream
+	 * 
+	 * @return <code>true</code> if the HTML structure and values are the same,
+	 *         <code>false</code> otherwise
+	 * 
+	 * @throws IOException
+	 *             if there is an error reading data
 	 */
 	public static boolean compareHtml(InputStream stream1, InputStream stream2) throws IOException {
 		if(stream1 == null) {
@@ -103,18 +136,45 @@ public class HTMLComparer {
 		Source source1 = new Source(stream1);
 		Source source2 = new Source(stream2);
 		
-		return compare(source1, source2);
+		return compareHtml(source1, source2);
+	}
+	
+	/**
+	 * Compare the two {@link InputStream} implementations that provide the HTML
+	 * stream.
+	 * 
+	 * @param stream1
+	 *            the first stream
+	 * 
+	 * @param stream2
+	 *            the second stream
+	 * 
+	 * @return <code>True</code> if the HTML structure and values are the same,
+	 *         <code>False</code> otherwise, and <code>null</code> if something
+	 *         fails
+	 * 
+	 */
+	public static Boolean compareHtmlQuietly(InputStream stream1, InputStream stream2) {
+		try {
+			return compareHtml(stream1, stream2);
+		} catch (IOException e) {
+			// eat up
+		}
+		
+		return null;
 	}
 	
 	/**
 	 * Compare the two {@link String} representations of HTML code
 	 * 
-	 * @param html1 the first HTML string
+	 * @param html1
+	 *            the first HTML string
 	 * 
-	 * @param html2 the second HTML string
+	 * @param html2
+	 *            the second HTML string
 	 * 
-	 * @return <code>true</code> if the HTML structure and values are the same, <code>false</code>
-	 * otherwise
+	 * @return <code>true</code> if the HTML structure and values are the same,
+	 *         <code>false</code> otherwise
 	 */
 	public static boolean compareHtml(String html1, String html2) {
 		if(html1 == null) {
@@ -132,21 +192,23 @@ public class HTMLComparer {
 		Source source1 = new Source(html1);
 		Source source2 = new Source(html2);
 		
-		return compare(source1, source2);
+		return compareHtml(source1, source2);
 	}
 	
 	/**
-	 * Method to compare two given Jericho HTML parser {@link Source} objects that represent
-	 * an AST of the parsed HTML code
+	 * Method to compare two given Jericho HTML parser {@link Source} objects
+	 * that represent an AST of the parsed HTML code
 	 * 
-	 * @param source1 the first AST
+	 * @param source1
+	 *            the first AST
 	 * 
-	 * @param source2 the second AST
+	 * @param source2
+	 *            the second AST
 	 * 
-	 * @return <code>true</code> if the HTML structure and values are the same, <code>false</code>
-	 * otherwise
+	 * @return <code>true</code> if the HTML structure and values are the same,
+	 *         <code>false</code> otherwise
 	 */
-	private static boolean compare(Source source1, Source source2) {
+	public static boolean compareHtml(Source source1, Source source2) {
 		List<Tag> tags1 = source1.getAllTags();
 		List<Tag> tags2 = source2.getAllTags();
 		
