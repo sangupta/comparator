@@ -8,15 +8,15 @@ public class XMLComparerTest {
 	
 	@Test
 	public void testXMLComparer() {
-		Assert.assertFalse(XMLComparer.compareQuietly((String) null, (String) null));
-		Assert.assertFalse(XMLComparer.compareQuietly("", null));
-		Assert.assertFalse(XMLComparer.compareQuietly(null, ""));
+		Assert.assertFalse(XMLComparer.compareXmlQuietly((String) null, (String) null));
+		Assert.assertFalse(XMLComparer.compareXmlQuietly("", null));
+		Assert.assertFalse(XMLComparer.compareXmlQuietly(null, ""));
 		
-		Assert.assertTrue(XMLComparer.compareQuietly("<hello />", "<hello />"));
-		Assert.assertTrue(XMLComparer.compareQuietly("<hello />", "<hello></hello>"));
-		Assert.assertFalse(XMLComparer.compareQuietly("<hello />", "<hello> </hello>"));
+		Assert.assertTrue(XMLComparer.compareXmlQuietly("<hello />", "<hello />"));
+		Assert.assertTrue(XMLComparer.compareXmlQuietly("<hello />", "<hello></hello>"));
+		Assert.assertFalse(XMLComparer.compareXmlQuietly("<hello />", "<hello> </hello>"));
 		
-		Assert.assertTrue(XMLComparer.compareQuietly("<hello mode=\"test\" />", "<hello mode=\"test\"></hello>"));
+		Assert.assertTrue(XMLComparer.compareXmlQuietly("<hello mode=\"test\" />", "<hello mode=\"test\"></hello>"));
 	}
 
 }

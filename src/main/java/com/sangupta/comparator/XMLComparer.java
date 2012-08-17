@@ -59,7 +59,7 @@ public class XMLComparer {
 	 * @throws ParserConfigurationException if something fails
 	 * 
 	 */
-	public static boolean compare(String xml1, String xml2) throws SAXException, IOException, ParserConfigurationException {
+	public static boolean compareXml(String xml1, String xml2) throws SAXException, IOException, ParserConfigurationException {
 		if(xml1 == null || xml2 == null) {
 			return false;
 		}
@@ -68,7 +68,7 @@ public class XMLComparer {
 			return true;
 		}
 		
-		return compare(new StringReader(xml1), new StringReader(xml2));
+		return compareXml(new StringReader(xml1), new StringReader(xml2));
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class XMLComparer {
 	 * 
 	 * @throws ParserConfigurationException if something fails
 	 */
-	public static boolean compare(Reader reader1, Reader reader2) throws SAXException, IOException, ParserConfigurationException {
+	public static boolean compareXml(Reader reader1, Reader reader2) throws SAXException, IOException, ParserConfigurationException {
 		if(reader1 == null || reader2 == null) {
 			return false;
 		}
@@ -95,7 +95,7 @@ public class XMLComparer {
 			return true;
 		}
 		
-		return compare(new InputSource(reader1), new InputSource(reader2));
+		return compareXml(new InputSource(reader1), new InputSource(reader2));
 	}
 	
 	/**
@@ -113,7 +113,7 @@ public class XMLComparer {
 	 * 
 	 * @throws ParserConfigurationException if something fails
 	 */
-	public static boolean compare(InputSource source1, InputSource source2) throws SAXException, IOException, ParserConfigurationException {
+	public static boolean compareXml(InputSource source1, InputSource source2) throws SAXException, IOException, ParserConfigurationException {
 		if(source1 == null || source2 == null) {
 			return false;
 		}
@@ -148,7 +148,7 @@ public class XMLComparer {
 	 * 
 	 * @throws ParserConfigurationException if something fails
 	 */
-	public static boolean compare(InputStream stream1, InputStream stream2) throws ParserConfigurationException, SAXException, IOException {
+	public static boolean compareXml(InputStream stream1, InputStream stream2) throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilder db = getDocumentBuilder();
 		
 		Document doc1 = db.parse(stream1);
@@ -170,9 +170,9 @@ public class XMLComparer {
 	 * @return <code>True</code> if XMLs are markup equivalent, <code>false</code> otherwise, and <code>null</code>
 	 * if something fails.
 	 */
-	public static Boolean compareQuietly(String xml1, String xml2) {
+	public static Boolean compareXmlQuietly(String xml1, String xml2) {
 		try {
-			return compare(xml1, xml2);
+			return compareXml(xml1, xml2);
 		} catch (SAXException e) {
 			// eat up
 		} catch (IOException e) {
@@ -194,9 +194,9 @@ public class XMLComparer {
 	 * @return <code>True</code> if XMLs are markup equivalent, <code>false</code> otherwise, and <code>null</code>
 	 * if something fails.
 	 */
-	public static Boolean compareQuietly(Reader reader1, Reader reader2) {
+	public static Boolean compareXmlQuietly(Reader reader1, Reader reader2) {
 		try {
-			return compare(reader1, reader2);
+			return compareXml(reader1, reader2);
 		} catch (SAXException e) {
 			// eat up
 		} catch (IOException e) {
@@ -218,9 +218,9 @@ public class XMLComparer {
 	 * @return <code>True</code> if XMLs are markup equivalent, <code>false</code> otherwise, and <code>null</code>
 	 * if something fails.
 	 */
-	public static Boolean compareQuietly(InputSource source1, InputSource source2) {
+	public static Boolean compareXmlQuietly(InputSource source1, InputSource source2) {
 		try {
-			return compare(source1, source2);
+			return compareXml(source1, source2);
 		} catch (SAXException e) {
 			// eat up
 		} catch (IOException e) {
@@ -242,9 +242,9 @@ public class XMLComparer {
 	 * @return <code>True</code> if XMLs are markup equivalent, <code>false</code> otherwise, and <code>null</code>
 	 * if something fails.
 	 */
-	public static Boolean compareQuietly(InputStream stream1, InputStream stream2) {
+	public static Boolean compareXmlQuietly(InputStream stream1, InputStream stream2) {
 		try {
-			return compare(stream1, stream2);
+			return compareXml(stream1, stream2);
 		} catch (ParserConfigurationException e) {
 			// eat up
 		} catch (SAXException e) {

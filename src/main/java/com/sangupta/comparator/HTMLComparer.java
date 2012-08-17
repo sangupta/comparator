@@ -45,6 +45,9 @@ import net.htmlparser.jericho.Tag;
  */
 public class HTMLComparer {
 	
+	/**
+	 * Turn off the Jericho HTML parser logging.
+	 */
 	static {
 		Config.LoggerProvider = LoggerProvider.DISABLED;
 	}
