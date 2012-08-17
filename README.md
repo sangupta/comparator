@@ -12,6 +12,10 @@ And thus, the comparison needs markup analysis.
 Features
 --------
 
+**0.9.0**
+
+* Added support for XML and JSON comparison
+
 **0.1.1**
 
 * Support for HTML comments
